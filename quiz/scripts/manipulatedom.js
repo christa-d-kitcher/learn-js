@@ -12,6 +12,7 @@ function createTRNode(colNodes) {
 
 function createTDNode(childNode) {
   let tdNode = document.createElement("td");
+  tdNode.classList.add('tdNode');
   tdNode.appendChild(childNode);
   return tdNode;
 }
@@ -21,11 +22,32 @@ function createTxtNode(txt) {
   return txtNode;
 }
 
+/*Creating a button node*/
+function createBtnNode(btnTxt, e, l) {
+  let btnNode = document.createElement('button');
+  let btnNodeText = createTxtNode(btnTxt);
+  btnNode.appendChild(btnNodeText);
+  btnNode.addEventListener(e, l)
+  return btnNode;
+}
+
+/*Creating function to handle edit text*/
+function edit(node) {
+  /*console.log("testing")*/
+  let newNode = document.createElement("input");
+  newNode.type = "text";
+  newNode.placeholder = "Enter Cell (x,y) …";
+  node.replaceChild(newNode, node);
+}
+
+
 function addTable() {
   const tableNode = document.createElement("table");
   for(let i = 0; i < 3; i++) {
     let col1 = createTDNode(createTxtNode("Cell (" + i + ", 0)"));
-    tableNode.appendChild(createTRNode([col1]));
+    let col2 = createTDNode(createBtnNode("Edit Text", 'click', edit(col1)));
+    tableNode.appendChild(createTRNode([col1, col2]));
   }
   document.getElementById("root").appendChild(tableNode);
 }
+
