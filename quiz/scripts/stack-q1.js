@@ -9,6 +9,14 @@ class PStack {
     return this.#id;
   }
 
+  get persons() {
+    return this._persons;
+  }
+
+  set persons(persons) {
+    this._persons = persons;
+  }
+
 }
 
 class PStackImpl extends PStack {
